@@ -15,9 +15,7 @@ builder.Services.AddCors(options =>
 var connString = builder.Configuration.GetConnectionString("StudentEvalDB")!;
 builder.Services.AddSingleton(new DBHelper(connString));
 
-builder.WebHost.UseUrls(
-    "http://0.0.0.0:5103",
-    "https://0.0.0.0:7130");
+builder.WebHost.UseUrls("http://0.0.0.0:8080");
 
 var app = builder.Build();
 
@@ -206,4 +204,4 @@ app.MapPost("/api/student/apply-graduation", (GraduationRequest req, DBHelper db
     return Results.Ok(new { message = "Applied successfully." });
 });
 
-app.Run();
+app.Run("http://0.0.0.0:8080");
